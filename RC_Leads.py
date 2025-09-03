@@ -36,6 +36,9 @@ def check_password():
 # --- UI Setup ---
 st.title("🤖 Rough Country Lead Generator")
 
+if not check_password():
+    st.stop()  # Do not continue if check_password is not True.
+
 with st.sidebar:
     st.header("Search Settings")
     max_locations = st.number_input(
@@ -165,3 +168,4 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
 
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
