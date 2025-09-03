@@ -41,7 +41,7 @@ if not check_password():
     st.stop()
 
 # --- If login is successful, show the main app ---
-st.title("🤖 Location Scout Bot")
+st.title("🤖 Results Will Output Below")
 API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 if not check_password():
@@ -176,5 +176,6 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
 
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
 
 
