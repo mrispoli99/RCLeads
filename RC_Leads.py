@@ -12,29 +12,37 @@ API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 # --- Password Protection ---
 def check_password():
-    """Returns `True` if the user had the correct password."""
+    """Returns `True` if the user entered the correct password."""
 
-    def password_entered():
-        """Checks whether a password entered by the user is correct."""
-        if st.session_state["password"] == st.secrets["APP_PASSWORD"]:
-            st.session_state["password_correct"] = True
-            del st.session_state["password"]  # Don't store password.
-        else:
-            st.session_state["password_correct"] = False
-
+    # Check if we've already authenticated.
     if st.session_state.get("password_correct", False):
         return True
 
-    # Show input for password.
-    st.text_input(
-        "Password", type="password", on_change=password_entered, key="password"
-    )
-    if "password_correct" in st.session_state and not st.session_state["password_correct"]:
-        st.error("😕 Password incorrect")
+    # Show a login form.
+    with st.form("login_form"):
+        password = st.text_input("Password", type="password")
+        submitted = st.form_submit_button("Enter")
+
+        if submitted:
+            if password == st.secrets["APP_PASSWORD"]:
+                st.session_state["password_correct"] = True
+                # Rerun the app to show the main content.
+                st.rerun()
+            else:
+                st.error("😕 Password incorrect")
+    
     return False
 
 # --- UI Setup ---
 st.title("🤖 Rough Country Lead Generator")
+
+# Run the password check. If it fails, stop the app.
+if not check_password():
+    st.stop()
+
+# --- If login is successful, show the main app ---
+st.title("🤖 Location Scout Bot")
+API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 if not check_password():
     st.stop()  # Do not continue if check_password is not True.
@@ -168,4 +176,5 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
 
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
 
