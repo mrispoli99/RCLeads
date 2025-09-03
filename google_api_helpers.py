@@ -25,7 +25,7 @@ def geocode_zip(_api_key, zip_code):
 def search_places(api_key, query, location_lat, location_lng):
     # ... same as before ...
     endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-    search_radius_meters = 5000
+    search_radius_meters = 30000
     params = {
         'query': query,
         'location': f'{location_lat},{location_lng}',
@@ -91,4 +91,5 @@ def analyze_image_labels(image_content):
         
     except Exception as e:
         st.error(f"Error with Vision API: {e}")
+
         return []
