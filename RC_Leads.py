@@ -55,7 +55,7 @@ with st.sidebar:
         max_value=100000, # Increased max value for larger searches
         value=50, 
         step=1,
-        help="The bot will search until it finds this many unique locations."
+        help="National search across the top 150 metro areas. Uses one central zip code and 30 mile radius in each metro."
     )
 
 if "messages" not in st.session_state:
