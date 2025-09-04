@@ -68,14 +68,14 @@ with st.sidebar:
     )
     st.markdown("---")
     # NEW: Metro area override controls
-    use_metro_search = st.checkbox("Pick Metro Areas (If not selected, the bot will do a national search using a 30 mile radius of a central zip code in each metro)")
+    use_metro_search = st.checkbox("Pick Metro Areas (If not selected, I will do a national search using a 30 mile radius of a central zip code in each metro)")
     selected_metros = []
     if use_metro_search:
         selected_metros = st.multiselect("Select Metro Areas:", options=TOP_100_METROS)
 
 # ... Chat history setup ...
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "What kind of place are you looking for? I will generate a CSV file with the results. Do a random national search or select metro areas on the left."}]
+    st.session_state.messages = [{"role": "assistant", "content": "What kind of place are you looking for? I will generate a CSV file with the results. I will do a random national search or you can select metro areas on the left."}]
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
@@ -182,4 +182,5 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
                 )
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
 
