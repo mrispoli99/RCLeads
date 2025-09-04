@@ -82,7 +82,7 @@ with st.sidebar:
 
 # ... Chat history setup ...
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "What kind of place are you looking for? I will generate a CSV file with the results. I will do a random national search or you can select metro areas on the left."}]
+    st.session_state.messages = [{"role": "assistant", "content": "What kind of place are you looking for? I will generate a CSV file with the results based on a random national search or you can select metro areas on the left."}]
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
@@ -189,6 +189,7 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
                 )
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
 
 
 
