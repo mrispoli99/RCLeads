@@ -8,6 +8,8 @@ from io import BytesIO
 from google.cloud import vision
 from google.oauth2 import service_account
 
+
+
 # --- Functions using API Key (No changes here) ---
 @st.cache_data
 def geocode_zip(_api_key, zip_code):
@@ -22,20 +24,25 @@ def geocode_zip(_api_key, zip_code):
             return {'lat': location['lat'], 'lng': location['lng']}
     return None
 
-def search_places(api_key, query, location_lat, location_lng):
-    # ... same as before ...
+
+
+# search_places function
+def search_places(api_key, query, location_lat, location_lng, radius_meters):
+    """Searches for places using keywords around a specific coordinate with a given radius."""
     endpoint_url = "https://maps.googleapis.com/maps/api/place/textsearch/json"
-    search_radius_meters = 30000
+
     params = {
         'query': query,
         'location': f'{location_lat},{location_lng}',
-        'radius': search_radius_meters,
+        'radius': radius_meters,  # Use the radius passed into the function
         'key': api_key
     }
     response = requests.get(endpoint_url, params=params)
     if response.status_code == 200:
         return response.json().get('results', [])
     return []
+
+
 
 def get_place_details(api_key, place_id):
     """Gets detailed information for a specific place."""
@@ -91,5 +98,4 @@ def analyze_image_labels(image_content):
         
     except Exception as e:
         st.error(f"Error with Vision API: {e}")
-
         return []
