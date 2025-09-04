@@ -55,8 +55,15 @@ def check_password():
 st.set_page_config(page_title="Rough Country Lead Generator", page_icon="🤖")
 if not check_password():
     st.stop()
+col1, col2 = st.columns([0.1, 0.9]) 
+with col1:
+    st.image("RC.jpg", width=60)  
+with col2:
+    st.markdown("## Rough Country Lead Generator")  
 
-st.title("🤖 Rough Country Lead Generator")
+
+
+
 API_KEY = st.secrets["GOOGLE_API_KEY"]
 
 # --- UI Setup ---
@@ -182,5 +189,6 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
                 )
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
 
 
