@@ -33,7 +33,16 @@ def calculate_score(place_details, image_labels, user_query):
         # Check for a showroom/retail area (+1 point)
         if any(label in image_labels for label in showroom_labels):
             score += 1
-            
+    # --- 3. Convert Raw Score to Final Tier ---
+    if raw_score >= 7:
+        return 1  # Top Tier
+    elif raw_score >= 4:
+        return 2  # Mid Tier
+    else:
+        return 3  # Low Tier
+
+    
     # The final score is returned (max possible is 10, though some combinations might exceed it)
     # To cap it at 10, you could use: return min(score, 10)
+
     return score
