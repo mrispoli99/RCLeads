@@ -165,7 +165,7 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
             if not all_results:
                 st.warning("Sorry, no matching places were found.")
             else:
-                sorted_results = sorted(all_results, key=lambda x: x['score'], reverse=True)
+                sorted_results = sorted(all_results, key=lambda x: x['score'], reverse=False)
                 st.success(f"Found {len(sorted_results)} locations! Your file is ready for download.")
                 
                 data_for_df = []
@@ -189,6 +189,7 @@ if prompt := st.chat_input("e.g., 'truck and atv accessories and installation'")
                 )
 
     st.session_state.messages.append({"role": "assistant", "content": f"I completed the search for '{prompt}'. The download link is available above."})
+
 
 
 
