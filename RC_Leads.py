@@ -166,7 +166,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]): st.markdown(message["content"])
 
 # --- Main Application Logic ---
-if prompt := st.chat_input("e.g., 'auto repair shops in Ohio'"):
+if prompt := st.chat_input("e.g., 'truck installation and accessories'"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"): st.markdown(prompt)
 
@@ -290,4 +290,5 @@ if st.session_state.search_results:
            label=f"Download {len(good_results)} Selected Locations", data=csv,
            file_name=f"selected_locations.csv", mime="text/csv",
         )
+
 
