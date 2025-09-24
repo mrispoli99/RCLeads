@@ -145,7 +145,7 @@ with st.sidebar:
     max_locations = st.number_input("Max number of locations to find:", min_value=1, max_value=10000, value=50, step=1)
     st.markdown("---")
     
-    search_mode = st.radio("Choose Search Method:", ("Search All Zips in `zips.csv`", "Search by Metro Area", "Search by Specific Zip Code(s)"))
+    search_mode = st.radio("Choose Search Method:", ("Search All Zips", "Search by Metro Area", "Search by Specific Zip Code(s)"))
     
     selected_metros, selected_zips = [], []
     if search_mode == "Search by Metro Area":
@@ -290,5 +290,6 @@ if st.session_state.search_results:
            label=f"Download {len(good_results)} Selected Locations", data=csv,
            file_name=f"selected_locations.csv", mime="text/csv",
         )
+
 
 
